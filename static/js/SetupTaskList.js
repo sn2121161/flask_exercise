@@ -107,4 +107,25 @@ function saveEditedTask() {
 //     setupTaskList(); 
 // }
 
-export {setupTaskList, saveEditedTask};
+async function fetchTasks() {
+    const response = await fetch('/tasks');
+    const tasks = await response.json();
+    const tasksList = document.getElementById('tasks-list');
+    tasksList.innerHTML = '';
+    tasks.forEach(task => {
+        const taskItem = document.createElement('li');
+        taskItem.className = 'task-item';
+        taskItem.innerHTML = `
+            <input type="checkbox" class="item-completed" id="task${task.id}" ${task.completed ? 'checked' : ''}>
+            <label for="task${task.id}"><strong>${task.title}</strong></label>
+            <p>Task Description:</p>
+            <ol>${task.description.split('\n').map(desc => `<li>${desc}</li>`).join('')}</ol>
+            <button class="submit-btn" disabled>Submit</button>
+            <button class="edit-btn" onclick="editTask(${task.id})">Edit</button>
+            <button class="delete-btn" onclick="deleteTask(${task.id})">Delete</button>
+        `;
+        tasksList.appendChild(taskItem);
+    });
+}
+
+export {setupTaskList, saveEditedTask, fetchTasks};

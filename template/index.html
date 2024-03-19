@@ -92,7 +92,7 @@
             
             <li class="task-item">
                 <input type="checkbox" class="item-completed" id="task7">
-                <label for="task8"><strong>If there's new incoming CA</strong></label>
+                <label for="task7"><strong>If there's new incoming CA</strong></label>
                 <p>Task Description:</p>
                 <ol>
                     <li>Update the new info on GCS-O</li>
@@ -105,7 +105,7 @@
             </li>
             <li class="task-item">
                 <input type="checkbox" class="item-completed" id="task8">
-                <label for="task9"><strong>Check position whether ICSD=Client Balance</strong></label>
+                <label for="task8"><strong>Check position whether ICSD=Client Balance</strong></label>
                 <p>Task Description:</p>
                 <ol>
                     <li>GCS-O report, Access report, ICSD balance printing</li>
@@ -118,7 +118,7 @@
             
             <li class="task-item">
                 <input type="checkbox" class="item-completed" id="task9">
-                <label for="task11"><strong>Check for settlement instruction of T-3; All transaction status - accordingly to latest settlement date</strong></label>
+                <label for="task9"><strong>Check for settlement instruction of T-3; All transaction status - accordingly to latest settlement date</strong></label>
                 <p>Task Description:</p>
                 <ol>
                     <li>T-0 - check clearing status, account balance - security and cash  (GCS, Banks link);</li>
@@ -148,6 +148,21 @@
             </form>
         </div>
     </div>
+
+    <div id="addTaskModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onClick="closeAddTaskModal">&times;</span>
+            <h2>Add New Task</h2>
+            <form id="addTaskForm">
+                <label for="newTaskTitle">Task Title:</label>
+                <input type="text" id="newTaskTitle" name="newTaskTitle" required>
+                <label for="newTaskDescription">Task Description:</label>
+                <textarea id="newTaskDescription" name="newTaskDescription" required></textarea>
+                <button type="submit" class="saveBtn">Save Task</button>
+            </form>
+        </div>
+    </div>
+    
     <script type="module" src="static/js/index.js"></script>
 </body>
 </html>

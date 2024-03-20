@@ -12,68 +12,43 @@ function deleteTask(taskItem) {
     
 };
 
-// function openEditTaskModal(taskId, title, description) {
-//     const modal = document.getElementById('editTaskModal');
-//     modal.style.display = 'block';
+
+
+function editTask(taskItem) {
+    const modal = document.getElementById("editTaskModal");
+    const span = document.getElementsByClassName("close")[0];
+    const form = document.getElementById('editTaskForm');
 
     
-//     document.getElementById('editingTaskId').value = taskId;
-//     document.getElementById('taskTitle').value = title;
-//     document.getElementById('taskDescription').value = description;
-// };
-
-// function editTask(taskItem) {
-//     const modal = document.getElementById("editTaskModal");
-//     const span = document.getElementsByClassName("close")[0];
-//     const form = document.getElementById('editTaskForm');
+    const taskId = taskItem.querySelector('.item-completed').id;;
+    const taskTitle = taskItem.querySelector('label').textContent;
+    let taskDescriptionItems = taskItem.querySelectorAll('ol li');
+    let taskDescription = Array.from(taskDescriptionItems).map(li => li.textContent).join("\n");
 
     
-//     const taskId = taskItem.querySelector('.item-completed').id;;
-//     const taskTitle = taskItem.querySelector('label').textContent;
-//     let taskDescriptionItems = taskItem.querySelectorAll('ol li');
-//     let taskDescription = Array.from(taskDescriptionItems).map(li => li.textContent).join("\n");
+    document.getElementById('editingTaskId').value = taskId;
+    document.getElementById('taskTitle').value = taskTitle;
+    document.getElementById('taskDescription').value = taskDescription;
 
     
-//     document.getElementById('editingTaskId').value = taskId;
-//     document.getElementById('taskTitle').value = taskTitle;
-//     document.getElementById('taskDescription').value = taskDescription;
-
-    
-//     modal.style.display = "block";
+    modal.style.display = "block";
 
    
-//     span.onclick = function() {
-//         modal.style.display = "none";
-//     }
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
 
     
-//     window.onclick = function(event) {
-//         if (event.target == modal) {
-//             modal.style.display = "none";
-//         }
-//     }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
     
     
-// };
+};
 
-function setupEditButtons() {
-    document.querySelectorAll('.edit-btn').forEach(button => {
-        button.onclick = function() {
-            const taskId = this.parentNode.getAttribute('data-task-id'); 
-            const taskTitle = this.parentNode.querySelector('label').textContent;
-            const taskDescription = this.parentNode.querySelector('ol').innerHTML;
 
-            
-            document.getElementById('editingTaskId').value = taskId;
-            document.getElementById('taskTitle').value = taskTitle;
-            
-            document.getElementById('taskDescription').value = taskDescription;
-
-            =
-            document.getElementById('editTaskModal').style.display = 'block';
-        };
-    });
-}
 
 
 
@@ -153,4 +128,4 @@ async function fetchTasks() {
     });
 }
 
-export {setupTaskList, saveEditedTask, fetchTasks, openEditTaskModal};
+export {setupTaskList, saveEditedTask, fetchTasks};

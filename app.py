@@ -36,12 +36,9 @@ def add_task():
 
 @app.route('/tasks/<int:id>', methods=['GET'])
 def get_task(id):
+    data = request.json
     task = Task.query.get_or_404(id)
-    return jsonify({
-        'id': task.id,
-        'title': task.title,
-        'description': task.description
-    }), 200
+    task.title = data
 # @app.route('/tasks', methods=['POST'])
 # def add_task():
 #     data = request.json

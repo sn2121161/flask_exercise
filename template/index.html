@@ -12,7 +12,126 @@
     <div id="daily-tasks">
     <strong><div id="clock" class="clock"></div></strong>
         <h2>Daily Tasks Checklist</h2>
-        <ul id="tasks-list"></ul>
+        <ul id="tasks-list">
+            <li class="task-item">
+                <input type="checkbox" class="item-completed" id="task1">
+                <label for="task1"><strong>Upload exchange rates to GCS-O system</strong></label>
+                <p>Task Description:</p>
+                <ol>
+                    <li>Download from Rifintiv website its daily exchange rate and send the info via email, update the rates in Access.</li>
+                    <li>Upload into GCS-O.</li>
+                </ol>
+                <button class="submit-btn" disabled>Submit</button>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+
+            </li>
+            <li class="task-item">
+                <input type="checkbox" class="item-completed" id="task2">
+                <label for="task2"><strong>Update Security Price</strong></label>
+                <p>Task Description:</p>
+                <ol>
+                    <li>Retrieve securities price from Bloomberg and Refinitiv daily feeds.</li>
+                    <li>Update security price into GCS-O system for each ISIN.</li>
+                </ol>
+                <button class="submit-btn" disabled>Submit</button>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </li>
+            <li class="task-item">
+                <input type="checkbox" class="item-completed" id="task3">
+                <label for="task3"><strong>Reconciliation</strong></label>
+                <p>Task Description:</p>
+                <ol>
+                    <li>Reconcile the ISINs and holdings against our own record.</li>
+                    <li>Place the copies of MT535 with the rest of the voucher.</li>
+                </ol>
+                <button class="submit-btn" disabled>Submit</button>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            <li class="task-item">
+                <input type="checkbox" class="item-completed" id="task4">
+                <label for="task4"><strong>Reports Generation & Switch System Business Date</strong></label>
+                <p>Task Description:</p>
+                <ol>
+                    <li>After the upload of exchange rates, ensure the update of securities prices for the same day before generating reporting in GCS-O system.</li>
+                    <li>Once reports been sent; first go to System Status Management to check the working date shown in the system, make sure it is the correct date to run day end batches.</li>
+                    <li>Once confirm process with end of day function.</li>
+                    <li>When successfully done, check again to check the system date has automatically moved to the next business date.</li>
+                </ol>
+                <button class="submit-btn" disabled>Submit</button>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </li>
+            <li class="task-item">
+                <input type="checkbox" class="item-completed" id="task5">
+                <label for="task5"><strong>ICSD notification - Reporting for all activities</strong></label>
+                <p>Task Description:</p>
+                <ol>
+                    <li>Check in Easyway</li>
+                    <li>Checks Swift messages received</li>
+                </ol>
+                <button class="submit-btn" disabled>Submit</button>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </li>
+            <li class="task-item">
+                <input type="checkbox" class="item-completed" id="task6">
+                <label for="task6"><strong>Corporate action incoming/ongoing/outgoing events</strong></label>
+                <p>Task Description:</p>
+                <ol>
+                    <li>MT54xx/MT56xx received from SWIFTMS.</li>
+                    <li>Check in ICSD system for corporate action.</li>
+                    <li>Check Refinitiv for corporate action</li>
+                    <li>Register CA into ACCESS Reminder</li>
+                </ol>
+                <button class="submit-btn" disabled>Submit</button>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </li>
+            
+            <li class="task-item">
+                <input type="checkbox" class="item-completed" id="task7">
+                <label for="task7"><strong>If there's new incoming CA</strong></label>
+                <p>Task Description:</p>
+                <ol>
+                    <li>Update the new info on GCS-O</li>
+                    <li>Update in Access keep track on all CA events</li>
+                    <li>Send the inform via email to clients</li>
+                </ol>
+                <button class="submit-btn" disabled>Submit</button>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </li>
+            <li class="task-item">
+                <input type="checkbox" class="item-completed" id="task8">
+                <label for="task8"><strong>Check position whether ICSD=Client Balance</strong></label>
+                <p>Task Description:</p>
+                <ol>
+                    <li>GCS-O report, Access report, ICSD balance printing</li>
+                    <li>Check, sign on reports and filling</li>
+                </ol>
+                <button class="submit-btn" disabled>Submit</button>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </li>
+            
+            <li class="task-item">
+                <input type="checkbox" class="item-completed" id="task9">
+                <label for="task9"><strong>Check for settlement instruction of T-3; All transaction status - accordingly to latest settlement date</strong></label>
+                <p>Task Description:</p>
+                <ol>
+                    <li>T-0 - check clearing status, account balance - security and cash  (GCS, Banks link);</li>
+                    <li>T-1 - check matching instruction, position status (GCS-O, EasyWay)</li>
+                    <li>T-2 - act accordingly to client instruction to send its instruction via GCS-O, after check has it been send successfully (GCS-O, SWIFT);</li>
+                    <li>T-3 - received settlement confirmation via swift, verify the details.</li>
+                    
+                </ol>
+                <button class="submit-btn" disabled>Submit</button>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </li>
+        </ul>
         <button id="add-task-btn">Add New Task</button>
     </div>
     <div id="editTaskModal" class="modal">
@@ -32,8 +151,8 @@
 
     <div id="addTaskModal" class="modal">
         <div class="modal-content">
-        <span class="close" onclick="closeAddTaskModal()">&times;</span>
-        <h2>Add New Task</h2>
+            <span class="close" onClick="closeAddTaskModal">&times;</span>
+            <h2>Add New Task</h2>
             <form id="addTaskForm">
                 <label for="newTaskTitle">Task Title:</label>
                 <input type="text" id="newTaskTitle" name="newTaskTitle" required>
@@ -43,6 +162,7 @@
             </form>
         </div>
     </div>
+    
     <script type="module" src="static/js/index.js"></script>
 </body>
 </html>

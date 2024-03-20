@@ -1,36 +1,29 @@
 import { updateClock } from "./Clock.js";
-import { addNewTask } from "./AddTask.js";
+import { addTasks, closeAddTaskModal } from "./AddTask.js";
 import {setupTaskList, saveEditedTask, fetchTasks} from "./SetupTaskList.js";
 import { unlockCheckboxesWithTime } from "./UnclockCheckBoxesWithTime.js";
 
 
-document.getElementById('add-task-btn').onclick = function() {
-    document.getElementById('addTaskModal').style.display = 'block';
-};
-
-function closeAddTaskModal() {
-    document.getElementById('addTaskModal').style.display = 'none';
-};
-
-
 document.addEventListener("DOMContentLoaded", function() {
     updateClock();
-    // addNewTask();
-    // setupTaskList();
-    // unlockCheckboxesWithTime();
-   
-    fetchTasks();
-    document.querySelector('.close').addEventListener('click', closeAddTaskModal);
-    
+    addTasks();
+    closeAddTaskModal();
 });
+
+// editButton.addEventListener('click', () => 
+//     openEditTaskModal(task.id, task.title, task.description)
+//     );
+
+
+
+
+
 
 // document.querySelector('.close').addEventListener('click', closeAddTaskModal);
 // document.getElementById('editTaskForm').addEventListener('submit', function(event) {
 //     event.preventDefault();
 //     saveEditedTask();
 // });
-
-
 document.getElementById('addTaskForm').onsubmit = async function(e) {
     e.preventDefault(); 
     const title = document.getElementById('newTaskTitle').value;
@@ -46,8 +39,39 @@ document.getElementById('addTaskForm').onsubmit = async function(e) {
 
     if (response.ok) {
         closeAddTaskModal(); 
-        fetchTasks(); 
+        addTasks(); 
     } else {
         alert('Failed to add task');
     }
 };
+
+
+
+// async function fetchTaskDetails(taskId) {
+//     try {
+        
+//         const response = await fetch(`/tasks/${taskId}`);
+//         if (!response.ok) {
+//             throw new Error(`HTTP error! status: ${response.status}`);
+//         }
+//         const task = await response.json();
+
+        
+//         document.getElementById('editingTaskId').value = task.id;
+//         document.getElementById('taskTitle').value = task.title;
+//         document.getElementById('taskDescription').value = task.description;
+
+        
+//         document.getElementById('editTaskModal').style.display = 'block';
+//     } catch (error) {
+//         console.error("Could not fetch task details: ", error);
+       
+//     }
+// }
+
+// document.querySelectorAll('.edit-btn').forEach(button => {
+//     button.onclick = function() {
+//         const taskId = this.getAttribute('data-task-id');
+//         fetchTaskDetails(taskId);
+//     };
+// });

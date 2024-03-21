@@ -36,25 +36,21 @@ def add_task():
 
 @app.route('/tasks/<int:id>', methods=['GET'])
 def get_task(id):
-    data = request.json
     task = Task.query.get_or_404(id)
-    task.title = data
-# @app.route('/tasks', methods=['POST'])
-# def add_task():
-#     data = request.json
-#     task = Task(title=data['title'], description=data['description'], completed=data['completed'])
-#     db.session.add(task)
-#     db.session.commit()
-#     return jsonify({'message': 'Task added'}), 201
+    return jsonify([{'id': task.id, 'title': task.title, 'description': task.description, 'completed':task.completed}]), 201
 
 @app.route('/tasks/<int:id>', methods=['PUT'])
 def update_task(id):
     data = request.json
+    print("Received update request for task:", data)
     task = Task.query.get_or_404(id)
     task.title = data['title']
     task.description = data['description']
     db.session.commit()
-    return jsonify({'message': 'Task updated'}), 200
+    
+    return jsonify([{'id': task.id, 'title': task.title, 'description': task.description, 'completed':task.completed}]), 201
+
+
 
 @app.route('/tasks/<int:id>', methods=['DELETE'])
 def delete_task(id):

@@ -1,22 +1,39 @@
 import { updateClock } from "./Clock.js";
 import { addTasks, closeAddTaskModal } from "./AddTask.js";
-import {setupTaskList, saveEditedTask, fetchTasks} from "./SetupTaskList.js";
 import { unlockCheckboxesWithTime } from "./UnclockCheckBoxesWithTime.js";
 import { updateTaskItemOnPage, editTask } from "./UpdateTask.js";
+import { deleteTask } from "./DeleteTask.js";
 
 document.addEventListener("DOMContentLoaded", function() {
     updateClock();
     addTasks();
     closeAddTaskModal();
+
     document.querySelectorAll('.edit-btn').forEach(button => {
         button.addEventListener('click', () => {
             const taskId = button.getAttribute('data-task-id'); // Assuming you add a 'data-task-id' attribute to your buttons
             editTask(taskId);
         });
     });
-    
+
+    document.querySelector('.close').addEventListener('click', function() {
+        document.getElementById('editTaskModal').style.display = 'none';
+    });
+
+    document.querySelectorAll('.delete-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const taskId = button.getAttribute('data-task-id');
+            deleteTask(taskId);
+        });
+    });
 });
 
+// document.addEventListener('click', function(event) {
+//     if (event.target && event.target.classList.contains('delete-btn')) {
+//         const taskId = event.target.getAttribute('data-task-id');
+//         deleteTask(taskId);
+//     }
+// });
 
 document.getElementById('addTaskForm').onsubmit = async function(e) {
     e.preventDefault(); 
@@ -45,7 +62,6 @@ document.getElementById('editTaskForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
     const taskId = document.getElementById('editingTaskId').value;
-    
     let title = document.getElementById('taskTitle').value;
     let description = document.getElementById('taskDescription').value;
     
@@ -64,10 +80,11 @@ document.getElementById('editTaskForm').addEventListener('submit', function(e) {
         return response.json();
     })
     .then(data => {
-       
-        updateTaskItemOnPage(taskId, title=data.title, description=data.description);
-       
+        
+        const task = data[0];
+        updateTaskItemOnPage(taskId, title=task.title, description=task.description);
         document.getElementById('editTaskModal').style.display = 'none';
+    
     })
     .catch(error => console.error('Error:', error));
 });

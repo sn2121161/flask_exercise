@@ -19,17 +19,19 @@ function openEditModal(taskId) {
 
 function updateTaskItemOnPage(taskId, title, description) {
     
-    const taskItem = document.getElementById(`task${taskId}`);
-    console.log(taskItem);
+    const editButton = document.querySelector(`button.edit-btn[onclick='editTask(${taskId})']`);
+    const taskItem = editButton.closest('.task-item');
     if (taskItem) {
         
-        const label = taskItem.querySelector(`.label[for='task${taskId}']`);
-        console.log(label);
+        let label = taskItem.querySelector(`label[for='task${taskId}']`);
+        
         if (label) {
             label.innerHTML = `<strong>${title}</strong>`;
+        }else{
+            console.error('label is not found.')
         }
         
-        const ol = taskItem.querySelector('ol');
+        let ol = taskItem.querySelector('ol');
         
         if (ol) {
             ol.innerHTML = description.split('\n').map(desc => `<li>${desc}</li>`).join('');

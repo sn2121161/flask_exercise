@@ -42,7 +42,7 @@ def get_task(id):
 @app.route('/tasks/<int:id>', methods=['PUT'])
 def update_task(id):
     data = request.json
-    print("Received update request for task:", data)
+    # print("Received update request for task:", data)
     task = Task.query.get_or_404(id)
     task.title = data['title']
     task.description = data['description']

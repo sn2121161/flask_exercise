@@ -10,7 +10,10 @@ body {
     border-radius: 5px;
 }
 
-
+#task-desc {
+    list-style-type: none;
+    position: relative;
+}
 
 #tasks-list {
     
@@ -27,7 +30,7 @@ body {
     margin-top: -10px;
     margin-bottom: 20px;
 }
-.save-btn, .edit-btn, .delete-btn {
+.submit-btn, .save-btn, .edit-btn, .delete-btn {
      
     margin-bottom: 10px; 
     
@@ -94,6 +97,14 @@ body {
     font-weight: bold;
 }
 
+.color-point {  
+    /* background-color: blue; 背景色为蓝色   */
+    border-radius: 50%; /* 形状为圆形 */  
+    width: 12px; /* 宽度 */  
+    height: 12px; /* 高度 */  
+    display: inline-block; /* 以内联块级元素显示 */  
+    margin-right: 5px; /* 右边距 */  
+}
 
 
 /* .close-addTaskModal {

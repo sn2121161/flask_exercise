@@ -34,6 +34,7 @@ async function addTasks() {
     const response = await fetch('/tasks');
     const tasks = await response.json();
     const tasksList = document.getElementById('tasks-list');
+    let pointColor = "red";  // 增加red初始颜色
     tasksList.innerHTML = '';
     tasks.forEach(task => {
         const taskItem = document.createElement('li');
@@ -42,11 +43,18 @@ async function addTasks() {
             <input type="checkbox" class="item-completed" id="task${task.id}" ${task.completed ? 'checked' : ''}>
             <label for="task${task.id}"><strong>${task.title}</strong></label>
             <p>Task Description:</p>
-            <ol>${task.description.split('\n').map(desc => `<li>${desc}</li>`).join('')}</ol>
-            <button class="submit-btn" disabled>Submit</button>
+            <ol id = "task-desc">
+            ${task.description.split('\n').map(desc => `
+            <li><span class="color-point" style="background-color: ${pointColor};"></span>
+            <span> &nbsp; </span>
+            ${desc}</li>
+            `).join('')}
+            </ol>
+            <button class="submit-btn" onclick="submitTask(${task.id}, ${task.id})">Submit</button>
             <button class="edit-btn" onclick="editTask(${task.id})">Edit</button>
             <button class="delete-btn" onclick="deleteTask(${task.id})">Delete</button>
         `;
+        // 开放一个submit-btn的窗口可以让人点击
         tasksList.appendChild(taskItem);
     });
 }

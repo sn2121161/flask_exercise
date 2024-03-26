@@ -2,28 +2,32 @@ from models import Task, db
 from app import app
 
 def insert_sample_tasks():
+    """status is boolean, Doing is False, Done is True"""
     
     tasks_to_add = [
     {
         "title": "Upload exchange rates to GCS-O system",
         "description": "1. Download from Refinitiv website its daily exchange rate and send the info via email, update the rates in Access.\n2. Upload into GCS-O.",
-        "completed" : True
+        "completed" : True,
+        "status": False
     },
     {
         "title": "Update Security Price",
         "description": "1. Retrieve securities price from Bloomberg and Refinitiv daily feeds.\n2. Update security price into GCS-O system for each ISIN.",
-        "completed" : False
+        "completed" : False,
+        "status": False
     },
     {
         "title": "Reconciliation",
         "description": "1. Reconcile the ISINs and holdings against our own record.\n2. Place the copies of MT535 with the rest of the voucher.",
-        "completed" : True
+        "completed" : True,
+        "status": False
     },
 ]
     
     with app.app_context():
         for task_info in tasks_to_add:
-            task = Task(title=task_info['title'], description=task_info['description'], completed=task_info['completed'])
+            task = Task(title=task_info['title'], description=task_info['description'], completed=task_info['completed'], status=task_info['status'])
             db.session.add(task)
         db.session.commit()
         print("Sample tasks added to the database.")

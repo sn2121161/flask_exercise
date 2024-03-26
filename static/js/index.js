@@ -3,12 +3,22 @@ import { addTasks, closeAddTaskModal } from "./AddTask.js";
 import { unlockCheckboxesWithTime } from "./UnclockCheckBoxesWithTime.js";
 import { updateTaskItemOnPage, editTask } from "./UpdateTask.js";
 import { deleteTask } from "./DeleteTask.js";
+import { submitTask } from "./submitTask.js";
 
 document.addEventListener("DOMContentLoaded", function() {
     updateClock();
     addTasks();
     closeAddTaskModal();
 
+    // 监听.submit-btn的情况
+    document.querySelectorAll('.submit-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const taskId = button.getAttribute('data-task-id');
+            submitTask(taskId);
+        });
+    });
+
+    // 监听.edit-btn的
     document.querySelectorAll('.edit-btn').forEach(button => {
         button.addEventListener('click', () => {
             const taskId = button.getAttribute('data-task-id'); // Assuming you add a 'data-task-id' attribute to your buttons
@@ -45,7 +55,7 @@ document.getElementById('addTaskForm').onsubmit = async function(e) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title, description, completed: false }), 
+        body: JSON.stringify({ title, description, completed:false, status:false }), 
     });
 
     if (response.ok) {

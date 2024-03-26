@@ -1,7 +1,7 @@
 
 function submitTask(taskItem, index) {
     
-    alert(`Task ${index + 1} submitted!`);
+    alert(`Task ${index+1} submitted!`);
     
 };
 
@@ -120,7 +120,7 @@ async function fetchTasks() {
             <label for="task${task.id}"><strong>${task.title}</strong></label>
             <p>Task Description:</p>
             <ol>${task.description.split('\n').map(desc => `<li>${desc}</li>`).join('')}</ol>
-            <button class="submit-btn" disabled>Submit</button>
+            <button class="submit-btn" onclick="submitTask(${task.id}, ${task.id})">Submit</button>
             <button class="edit-btn" onclick="editTask(${task.id})">Edit</button>
             <button class="delete-btn" onclick="deleteTask(${task.id})">Delete</button>
         `;
